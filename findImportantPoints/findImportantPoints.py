@@ -25,6 +25,9 @@ lines = np.array(lines)
 
 min_value = np.argmin(lines[:, 1])
 
+for value in lines:
+    value[1] = -1 * (value[1]) * (4.71e-3) + 39558
+
 clear = lambda: os.system("cls")
 command = -1
 pointsBefore = 25
@@ -51,6 +54,8 @@ while command != "0":
         plt.plot(
             lines[min_value - pointsBefore : min_value + pointsAfter, 0],
             lines[min_value - pointsBefore : min_value + pointsAfter, 1],
+            "o",
+            color="black",
         )
         plt.show()
     else:
