@@ -78,9 +78,9 @@ while command != "0":
         if os.path.exists("saidaDeDados.txt"):
             os.remove("saidaDeDados.txt")
         g = open("saidaDeDados.txt", "a")
-        for i in range(min_value - pointsBefore, min_value + pointsAfter, 1):
-            for data in lines[i]:
-                g.write(str(data) + " ")
+        data = getImportantPoints()
+        for points in data:
+            g.write(str(points) + " ")
             g.write("\n")
         g.close
     clear()
