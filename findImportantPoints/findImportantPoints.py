@@ -28,6 +28,15 @@ min_value = np.argmin(lines[:, 1])
 for value in lines:
     value[1] = -1 * (value[1]) * (4.71e-3) + 39558
 
+
+def getImportantPoints():
+    data = lines[min_value - pointsBefore : min_value + pointsAfter].copy()
+    for value in data:
+        value[0] = value[0] - lines[min_value - 1 - pointsBefore, 0] - 12
+    return data
+
+
+##################################################################################
 clear = lambda: os.system("cls")
 command = -1
 pointsBefore = 25
@@ -51,9 +60,10 @@ while command != "0":
         print("Defina a quantidade de pontos a serem visualizados depois do apice!")
         pointsAfter = int(input())
     elif command == "3":
+        data = getImportantPoints()
         plt.plot(
-            lines[min_value - pointsBefore : min_value + pointsAfter, 0],
-            lines[min_value - pointsBefore : min_value + pointsAfter, 1],
+            data[:, 0],
+            data[:, 1],
             "o",
             color="black",
         )
