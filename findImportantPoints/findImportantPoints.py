@@ -12,7 +12,10 @@ for path in pathList:
     pathString += path + "\\"
 
 listOfFiles = os.listdir(actualPath)
-f = open(pathString + listOfFiles[0], "r")
+fileNumber = 0
+while ".py" in listOfFiles[fileNumber] or "saidaDeDados" in listOfFiles[fileNumber]:
+    fileNumber += 1
+f = open(pathString + listOfFiles[fileNumber], "r")
 
 lines = []
 for line in f.readlines():
@@ -61,14 +64,19 @@ while command != "0":
         pointsAfter = int(input())
     elif command == "3":
         data = getImportantPoints()
+        plt.legend(["Teste 1"])
+        plt.title("Tyto II - 27/01")
+        plt.xlabel("Tempo(ms)")
+        plt.ylabel("Força (N)")
         plt.plot(
             data[:, 0],
             data[:, 1],
             "o",
-            color="black",
         )
         plt.show()
     else:
+        if os.path.exists("saidaDeDados.txt"):
+            os.remove("saidaDeDados.txt")
         g = open("saidaDeDados.txt", "a")
         for i in range(min_value - pointsBefore, min_value + pointsAfter, 1):
             for data in lines[i]:
